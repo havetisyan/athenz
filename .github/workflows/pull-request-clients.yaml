@@ -1,6 +1,10 @@
-name: Athenz v1.12.x Client Builds with JDK 11.x
+name: Athenz v1.12.x Client Build PR with JDK 11.x
 
-on: workflow_dispatch
+on:
+  pull_request:
+    branches:
+      - 'master'
+      - '1.12.x-jetty12'
 
 env:
   GOLANG_VERSION: 1.22

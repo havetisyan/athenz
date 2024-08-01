@@ -1,11 +1,15 @@
-name: Athenz v1.12.x with Jetty 12.x Pull Request
+name: Athenz v1.12.x Full Build PR with JDK 11.x
 
-on: workflow_dispatch
+on:
+  pull_request:
+    branches:
+      - 'master'
+      - '1.12.x-jetty12'
 
 env:
-  GOLANG_VERSION: ^1.22
-  NODEJS_VERSION: ^18
-  JAVA_VERSION: ^17
+  GOLANG_VERSION: 1.22
+  NODEJS_VERSION: 18
+  JAVA_VERSION: 17
   JAVA_DISTRO: temurin
   JAVA_ARCH: x64
 
