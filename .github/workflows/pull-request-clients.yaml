@@ -1,0 +1,34 @@
+name: Athenz v1.12.x Client Builds with JDK 11.x
+
+on: workflow_dispatch
+
+env:
+  GOLANG_VERSION: 1.22
+  JAVA_VERSION: 11
+  JAVA_DISTRO: temurin
+  JAVA_ARCH: x64
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Golang
+        id: setup-go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GOLANG_VERSION }}
+
+      - name: Setup Java
+        id: setup-java
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRO }}
+          architecture: ${{ env.JAVA_ARCH }}
+
+      - name: Build Athenz Clients
+        run: mvn -B -pl rdl/rdl-gen-athenz-java-model,rdl/rdl-gen-athenz-java-client,core/zms,core/zts,core/msd,libs/java/auth_core,libs/java/client_common,libs/java/cert_refresher,clients/java/zms,clients/java/zts,clients/java/zpe,clients/java/msd,libs/java/gcp_zts_creds install 
